@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "277767657941",
+    "firebase_url": "https://i-courier-18c0e.firebaseio.com",
+    "project_id": "i-courier-18c0e",
+    "storage_bucket": "i-courier-18c0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277767657941:android:0b7f2f407b7f6d81",
+        "android_client_info": {
+          "package_name": "com.icourier.qourier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277767657941-9d2t69f23nv3dikuej4vlvgs50hbjqor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqNNqLy-SEUztIaWC9m8_W83vY7dpGziA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@drawable/header_color"
+        android:id="@+id/bar"
+        android:padding="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp">
+
+        <TextView
+            android:textSize="15dp"
+            android:text="Use following action to make contact with this client, confirm collection time and address."
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/action"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/bar"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<ImageView
+    android:id="@+id/dcall"
+    android:layout_marginLeft="10dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/icons8phone"/>
+
+    <ImageView
+        android:id="@+id/dmessage"
+        android:layout_marginLeft="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+    android:src="@drawable/icons8message"/>
+
+<ImageView
+    android:id="@+id/demail"
+    android:layout_marginLeft="10dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@drawable/icons8email"/>
+
+    </LinearLayout>
+    <ImageView
+        android:layout_below="@+id/action"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/cancel"
+        android:paddingLeft="15dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/cancel"/>
+
+</RelativeLayout>

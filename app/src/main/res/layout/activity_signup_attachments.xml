@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d2cdcd"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    tools:context="com.icourier.qourier.SignupAttachments">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="2dp"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            android:id="@+id/btnReg_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/layout_border"
+            android:text="Personal Image"
+            />
+
+        <TextView
+            android:id="@+id/tvfile_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/btn_choose"
+            android:text="No file chosen"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="2dp"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            android:id="@+id/btnReg_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/layout_border"
+            android:text="ID"
+            />
+
+        <TextView
+            android:id="@+id/tvfile_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/btn_choose"
+            android:text="No file chosen"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="2dp"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            android:id="@+id/btnReg_licence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/layout_border"
+            android:text="Licence"
+            />
+
+        <TextView
+            android:id="@+id/tvfile_licence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/btn_choose"
+            android:text="No file chosen"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="2dp"
+        android:layout_marginBottom="4dp">
+
+        <Button
+            android:id="@+id/btnReg_vehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/layout_border"
+            android:text="Vehicle"
+            />
+
+        <TextView
+            android:id="@+id/tvfile_vehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/btn_choose"
+            android:text="No file chosen"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terms and Conditions"/>
+
+        <CheckBox
+            android:id="@+id/termsCheckbox"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/edtpasswords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/edtconf_passwords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:textStyle="bold"
+        android:background="@drawable/button_shape"
+        android:id="@+id/btn_signups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="22dp"
+        android:text="Sign up"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+    </LinearLayout>
+
+</RelativeLayout>
+    </ScrollView>

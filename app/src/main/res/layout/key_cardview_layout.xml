@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardElevation="3dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:contentPaddingLeft="3dp"
+    card_view:contentPaddingTop="8dp"
+    card_view:contentPaddingBottom="8dp"
+    card_view:contentPaddingRight="3dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:theme="@style/AlertDialog.AppCompat">
+
+    <!--  ListRow Left sied Thumbnail image -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/kname"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"/>
+
+        <LinearLayout
+            android:id="@+id/klayout"
+            android:layout_below="@+id/kname"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:textStyle="bold"
+                android:id="@+id/mssgIMGV"
+                android:layout_below="@+id/messagesubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/malesender"/>
+
+            <TextView
+                android:textColor="#0c8708"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="vfhdsvfhdsdvjdhvfhdsfhdsjhcvdsjbf"
+                android:id="@+id/tvkeys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_below="@+id/klayout"
+            android:id="@+id/keyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:text="time"
+            android:textColor="#2E768A"
+            android:textSize="13dp"
+            android:layout_alignParentRight="true"
+            />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
