@@ -1,59 +1,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/homeimage"
+    android:background="@drawable/shipment"
     android:layout_height="match_parent"
     tools:context="com.icourier.qourier.HomeFragment">
 
-    <TextView
-        android:id="@+id/textv"
-        android:layout_centerInParent="true"
-        android:textAlignment="center"
-        style="@style/TextAppearance.AppCompat.Display1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:shadowColor="#000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:fontFamily="sans-serif"
-        android:shadowRadius="1.0"
-        android:textColor="#fff"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:text="Shipment delivered on time with no hassle.\n\n\nWe take pride in serving our customers safely..."/>
+    <RelativeLayout
+        android:id="@+id/home_layout"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <TextView
+            android:paddingLeft="3dp"
+            android:layout_marginTop="50dp"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowColor="#000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:fontFamily="sans-serif"
+            android:shadowRadius="1.0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:text="*  Save Cost\n*  Personalised Service\n*  Insurance\n*  Easy Self Tracking\n*  Become A Service Provider"/>
 
-
-        <ImageButton
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+        <LinearLayout
+            android:id="@+id/lay"
+            android:layout_marginBottom="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/home_image_background"
-            android:elevation="4dp"
-           android:layout_marginRight="20dp"
-            android:src="@drawable/courier" />
-
-        <ImageButton
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/home_image_background"
-            android:elevation="4dp"
-            android:src="@drawable/orangebox" />
-
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
 
+            <ImageButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/home_image_background"
+                android:elevation="4dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/courier" />
 
+            <ImageButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/home_image_background"
+                android:elevation="4dp"
+                android:src="@drawable/orangebox" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

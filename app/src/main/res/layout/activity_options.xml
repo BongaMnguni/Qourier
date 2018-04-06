@@ -1,0 +1,197 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/shipment"
+    android:layout_height="match_parent"
+    tools:context="com.icourier.qourier.HomeFragment">
+
+    <RelativeLayout
+        android:padding="20dp"
+        android:id="@+id/first_layout"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:id="@+id/sec_layout"
+            android:background="@drawable/home_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:orientation="vertical"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cat_create_package"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="3dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardPreventCornerOverlap="true"
+                    card_view:theme="@style/AlertDialog.AppCompat">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_create"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CREATE PACKAGE"/>
+
+                        <ImageView
+                            android:id="@+id/go_create_package"
+                            android:layout_marginRight="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icons8forward"/>
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cat_mypackage"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="3dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardPreventCornerOverlap="true"
+                    card_view:theme="@style/AlertDialog.AppCompat">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_mypackage"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MY PACKAGES"/>
+
+                        <ImageView
+                            android:id="@+id/go_mypackages"
+                            android:layout_marginRight="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icons8forward"/>
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cat_payment"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="3dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardPreventCornerOverlap="true"
+                    card_view:theme="@style/AlertDialog.AppCompat">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_payment"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MAKE PAYMENT"/>
+
+                        <ImageView
+                            android:id="@+id/go_payment"
+                            android:layout_marginRight="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icons8forward"/>
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cat_key"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="3dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardPreventCornerOverlap="true"
+                    card_view:theme="@style/AlertDialog.AppCompat">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_key"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KEYS"/>
+
+                        <ImageView
+                            android:id="@+id/go_key"
+                            android:layout_marginRight="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icons8forward"/>
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

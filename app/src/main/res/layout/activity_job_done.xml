@@ -5,46 +5,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d2cdcd"
-    android:padding="16dp"
+    android:background="@drawable/shipment"
     tools:context="com.icourier.qourier.JobDone">
 
     <LinearLayout
+        android:id="@+id/key_container"
+        android:background="@color/black"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputLayout
-            android:textColorHint="@color/colorPrimary"
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="20dp"
+            android:background="@drawable/key_shape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edtKey"
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:id="@+id/key_layout"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtKey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="KEY"
+                    android:inputType="text"
+                    android:maxLength="23"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/key_layout"
+                android:background="@drawable/layout_border"
+                android:id="@+id/btnkey"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="KEY"
-                android:inputType="text"
-                android:maxLength="23"/>
-        </android.support.design.widget.TextInputLayout>
+                android:text="Claim Your Cash"/>
 
-    <Button
-        android:background="@drawable/layout_border"
-        android:id="@+id/btnkey"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Claim Your Cash"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="20dp"
+            android:background="@drawable/key_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginTop="60dp"
             android:id="@+id/textv"
             android:layout_centerInParent="true"
             android:textAlignment="center"
             style="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/logo_img"
             android:layout_centerHorizontal="true"
             android:shadowColor="#000"
             android:shadowDx="2"
@@ -54,6 +76,8 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:text="Thanks For Your Service You Can Now Claim Your Cash"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

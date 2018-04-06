@@ -124,7 +124,7 @@ public class Login extends AppCompatActivity {
                                             finish();
 
                                         }else{
-                                                Intent i = new Intent(Login.this,MainActivity.class);
+                                                Intent i = new Intent(Login.this,Options.class);
                                                 i.putExtra("fullname",fullname);
                                                 i.putExtra("username",user);
 

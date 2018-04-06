@@ -15,6 +15,7 @@
             android:text="hdjfdsj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Button
             android:textStyle="bold"
             android:background="@drawable/button_shape"
@@ -24,8 +25,7 @@
             android:textColor="#fff"
             android:text="Accept Terms and Conditions"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            />
+            android:layout_height="35dp" />
 
     </RelativeLayout>
 </ScrollView>

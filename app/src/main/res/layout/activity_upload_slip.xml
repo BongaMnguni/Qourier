@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#d2cdcd"
+    android:background="#e4e2e2"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="2dp"
     tools:context="com.icourier.qourier.UploadSlip">
     <RelativeLayout
+        android:layout_margin="10dp"
         android:background="@drawable/layout_border"
         android:id="@+id/profilez"
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         <TextView
+            android:textStyle="bold"
             android:id="@+id/txtpnamez"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -33,7 +35,6 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:paddingTop="10dp"
         android:layout_below="@+id/profilez"
         android:id="@+id/service_recyclerView"
         android:layout_width="match_parent"

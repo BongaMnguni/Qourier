@@ -45,7 +45,10 @@
             android:label="@string/title_activity_tab"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SendNotification" />
-        <activity android:name=".Key"></activity>
+        <activity android:name=".Key" />
+        <activity android:name=".PackagePreview" />
+        <activity android:name=".Options" />
+        <activity android:name=".PackageEditor"></activity>
     </application>
 
 </manifest>

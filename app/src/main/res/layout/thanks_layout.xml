@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_thank"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/thanks_shape"
+    android:layout_gravity="bottom">
+        <RelativeLayout
+            android:background="@drawable/shipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/lay_thank"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <TextView
+                    android:padding="16dp"
+                    style="@style/TextAppearance.AppCompat.Display1"
+                    android:shadowColor="#000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:fontFamily="sans-serif"
+                    android:shadowRadius="1.0"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:text="Thank You For Creating A Package The Service Provider Will Get In Contact With You Soon !!! "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        </RelativeLayout>
+
+</FrameLayout>

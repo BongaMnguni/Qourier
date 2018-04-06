@@ -1,5 +1,6 @@
 package com.icourier.qourier;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +25,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +37,7 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
     String testin ,amount,date,fulnam,phne,bankname,bankaccount,branch;
     private Context context, c;
     RequestQueue requestQueue;
+    private DatabaseReference mDatabase;
     String insertUrlMessage = "http://mydm.co.za/Icourier/InsertKey.php";
     private List<Courier> uploads;
 
@@ -46,24 +51,26 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         c = parent.getContext();
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.courier_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.icourier_cardview, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
+    @SuppressLint("Range")
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Courier courier = uploads.get(position);
         Firebase.setAndroidContext(c);
-
         requestQueue = Volley.newRequestQueue(c);
 
         prefs = c.getSharedPreferences("Packages",Context.MODE_PRIVATE);
 
-        holder.textViewName.setText(courier.getName());
+       holder.layout.getBackground().setAlpha(100);
+
+        holder.textViewName.setText(courier.getpName());
         holder.textViewDate.setText(courier.getDate());
         holder.textViewAmount.setText("R"+courier.getAmount());
-        holder.textViewAddresses.setText(courier.getCity()+"\tTo\t"+courier.getDetination());
+        holder.textViewAddresses.setText(courier.getCity()+"   To   "+courier.getDetination());
         Glide.with(context).load(courier.getUrl()).into(holder.image);
 
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +78,7 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
             public void onClick(View view) {
 
                   fulnam = prefs.getString("fullname", null);
-                   phne = prefs.getString("phone", null);
+                  phne = prefs.getString("phone", null);
                   bankname = prefs.getString("bankname", null);
                   bankaccount = prefs.getString("bankaccount", null);
                   branch = prefs.getString("branch", null);
@@ -110,15 +117,47 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
                 testin =courier.getName().toString();
                 amount = "R" + courier.getAmount();
                 date = courier.getDate();
+                Intent preview = new Intent(c,PackagePreview.class);
+
+                preview.putExtra("username",courier.getUsername());
+                preview.putExtra("fullname",courier.getFullname());
+
                 nam.setText(testin);
+                preview.putExtra("name",testin);
+
                 street.setText(courier.getStreet());
+                preview.putExtra("street",courier.getStreet());
+
                 city.setText(courier.getCity());
+                preview.putExtra("city",courier.getCity());
+
                 code.setText(courier.getCode());
+                preview.putExtra("code",courier.getCode());
+
                 phon.setText(courier.getPhone());
-                pNam.setText(courier.getpName());
+                preview.putExtra("number",courier.getPhone());
+
+               // pNam.setText(courier.getpName());
+                preview.putExtra("pname",courier.getpName());
+
                 pDescription.setText(courier.getDescription());
+                preview.putExtra("description",courier.getDescription());
+
                 amountBid.setText(amount);
+                preview.putExtra("amount",amount);
+
                 dateS.setText(date);
+                preview.putExtra("date",date);
+
+                preview.putExtra("email",courier.getEmail().toString());
+                preview.putExtra("account",courier.getAccount());
+                preview.putExtra("pkey",courier.getPuniqkey());
+                preview.putExtra("mykey",courier.getKey());
+
+                Glide.with(context).load(courier.getUrl()).into(imageb);
+                preview.putExtra("image",courier.getUrl());
+
+                c.startActivity(preview);
 
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -179,9 +218,8 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
                         String uniqueID = courier.getUsername()+"*"+username;
 
                         Courier pack = new Courier(courier.getPuniqkey(),date,"false",amount,courier.getpName(),courier.getDescription(), courier.getName(), courier.getPhone(),courier.getStreet(),courier.getCity(),courier.getCode(), courier.getEmail(), courier.getAccount(),uniqueID.toString().trim() ,courier.getUrl(),fulnam,phne,bankname, bankaccount,branch);
+                        reference.child("I-Courier").child("Packages").child(courier.getPuniqkey()).setValue(pack);
 
-
-                        reference.child("I-Courier").child("Packages").child(key).setValue(pack);
 
                         dialog1.show();
 
@@ -199,8 +237,8 @@ public class CourierAdapter extends RecyclerView.Adapter<CourierAdapter.ViewHold
 
                     }
                 });
-                Glide.with(context).load(courier.getUrl()).into(imageb);
-                dialog.show();
+
+                //dialog.show();
             }
         });
 
@@ -216,6 +254,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
     public TextView textViewDate;
     public TextView textViewAmount;
     public TextView textViewAddresses;
+    RelativeLayout layout;
 
     public ImageView image;
 
@@ -227,6 +266,7 @@ class ViewHolder extends RecyclerView.ViewHolder {
         textViewAmount = (TextView) itemView.findViewById(R.id.courier_amount_output);
         textViewAddresses = (TextView) itemView.findViewById(R.id.courier_addresses_output);
         image = (ImageView) itemView.findViewById(R.id.courier_image_output);
+        layout = (RelativeLayout) itemView.findViewById(R.id.trasp_layout);
 
         }
     }

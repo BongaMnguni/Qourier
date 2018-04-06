@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardElevation="3dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:theme="@style/AlertDialog.AppCompat">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:background="@color/colorPrimary"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:id="@+id/courier_image_output"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            />
+        <RelativeLayout
+            android:id="@+id/trasp_layout"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:background="#000"
+            android:layout_gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/courier_name_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:id="@+id/courier_amount_output"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Bid Amount" />
+            <TextView
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/courier_date_output"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp">
+
+        <TextView
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_below="@+id/courier_image_output"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/courier_addresses_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Addresses" />
+    </FrameLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

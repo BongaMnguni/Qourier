@@ -17,11 +17,13 @@ public class Config {
     public static final String TAG_MESSAGE_DISPLAY = "message";
     public static final String TAG_MESSAGE_GENDER = "gender";
 
+    public static final String URL_DELETE =  "http://mydm.co.za/Icourier/delete.php";
     public static final String URL_GET_ALL_KEYS = "http://mydm.co.za/Icourier/RetrieveKey.php";
     public static final String TAG_KEY_TIME = "time";
     public static final String TAG_KEY_NAME = "name";
     public static final String TAG_KEY_USERNAME = "username";
     public static final String TAG_KEY_KEYS = "mykey";
+    public static final String TAG_KEY_ID = "id";
 
 
 

@@ -24,6 +24,7 @@ public class Courier {
     private String packname;
     private String email;
     private String username;
+    private String fullname;
     private String account;
     private String key;
     private String detination;
@@ -53,7 +54,7 @@ public class Courier {
 
     public Courier(){}
 
-    public Courier(String check,String username, String name, String phone, String street,String city,String code,String destination, String description, String date, String amount, String packname,String email,Double insurance, String url,String puniqkey) {
+    public Courier(String check,String username, String name, String phone, String street,String city,String code,String destination, String description, String date, String amount, String packname,String email,Double insurance, String url,String puniqkey,String delete) {
         this.username = username;
         this.puniqkey = puniqkey;
         this.name = name;
@@ -70,6 +71,7 @@ public class Courier {
         this.email = email;
         this.insurance = insurance;
         this.check = check;
+        this.delete = delete;
     }
     public Courier(String puniqkey,String date,String delete,String amount,String pName, String pDescription, String pFullname, String pPhone, String pStreet, String pCity, String pCode, String pEmail, String pAccount, String uniqueID,String purl
         ,String snam ,String sphon, String sbankname, String sbankaccount , String sbranch){
@@ -386,5 +388,13 @@ public class Courier {
 
     public void setpCode(String pCode) {
         this.pCode = pCode;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

@@ -10,12 +10,14 @@ public class KeyItems {
     private String name;
     private String username;
     private String time;
+    private String id;
 
-    public KeyItems(String keys, String name, String username, String time) {
+    public KeyItems(String keys, String name, String username, String time,String id) {
         this.keys = keys;
         this.name = name;
         this.username = username;
         this.time = time;
+        this.id = id;
     }
 
     public String getKeys() {
@@ -48,5 +50,13 @@ public class KeyItems {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

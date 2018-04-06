@@ -2,12 +2,16 @@ package com.icourier.qourier;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -18,13 +22,20 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,10 +58,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -58,7 +71,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int PICK_IMAGE_REQUEST = 234;
-
+    Bitmap bitmap;
     private EditText uniqkeyz;
     private EditText destination;
     private EditText description;
@@ -67,42 +80,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText amount;
     private EditText pname;
     private CheckBox insurance;
-
     private Button buttonChoose;
     private Button buttonUpload;
-
-    TextView file;
+    ImageView image;
     private String username;
-
     private String street,uniqkey;
     private String city;
     private String code;
     private String phone;
     private String email;
     private double newbidamt;
-
-
     //uri to store file
     private Uri filePath;
-
     private DatePickerDialog fromDatePickerDialog;
     private SimpleDateFormat dateFormatter;
-
     //firebase objects
     private StorageReference storageReference;
     private DatabaseReference mDatabase;
 
-    private boolean fabExpanded = false;
-    private FloatingActionButton fabSettings,FabPaypal,FabUploadSlip;
-    private LinearLayout layoutFabSave;
-    private LinearLayout layoutFabEdit;
+    private RelativeLayout layout;
+    private FrameLayout thankx;
      String fullna;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("Package");
+        getSupportActionBar().setTitle("Create Package");
         Firebase.setAndroidContext(getApplicationContext());
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -110,6 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         uniqkeyz = (EditText)findViewById(R.id.etuniqkeyz);
 
+        layout = (RelativeLayout) findViewById(R.id.lay_thank);
+        layout.getBackground().setAlpha(150);
+        thankx = (FrameLayout) findViewById(R.id.layout_thank);
         destination = (EditText)findViewById(R.id.etDestinationpcity);
         description = (EditText)findViewById(R.id.etPackageDescription);
         name = (EditText)findViewById(R.id.etName);
@@ -119,12 +126,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonChoose = (Button) findViewById(R.id.btn_choose);
         buttonUpload = (Button) findViewById(R.id.btn_upload);
 
-        file = (TextView) findViewById(R.id.title_choose);
+        image = (ImageView) findViewById(R.id.image_preview);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.image_layout);
+                dialog.setCancelable(true);
+
+                ImageView image = (ImageView) dialog.findViewById(R.id.img_full);
+                image.setImageBitmap(bitmap);
+                dialog.show();
+            }
+        });
 
         date = (EditText)findViewById(R.id.etxt_fromdate);
         date.setInputType(InputType.TYPE_NULL);
         date.requestFocus();
-
         // date
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
@@ -136,75 +156,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showFileChooser();
              }
         });
-
         buttonUpload.setOnClickListener(this);
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 uploadFile();
             }
 
         });
 
-
-        FabPaypal = (FloatingActionButton) this.findViewById(R.id.fabPaypal);
-        FabPaypal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),Paypal.class));
-            }
-        });
-
         Bundle bundle = getIntent().getExtras();
         fullna = bundle.getString("fullname");
          username = bundle.getString("username");
-
         street = bundle.getString("street");
         city = bundle.getString("city");
         code = bundle.getString("code");
         phone = bundle.getString("phone");
         email = bundle.getString("email");
-
-        FabUploadSlip = (FloatingActionButton) this.findViewById(R.id.fabUslip);
-        FabUploadSlip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(MainActivity.this,UploadSlip.class);
-                i.putExtra("fullname",fullna);
-                i.putExtra("username",username);
-                startActivity(i);
-            }
-        });
-
-        // Fabs
-
-        fabSettings = (FloatingActionButton) this.findViewById(R.id.fabSetting);
-
-        layoutFabSave = (LinearLayout) this.findViewById(R.id.layoutFabSave);
-        layoutFabEdit = (LinearLayout) this.findViewById(R.id.layoutFabEdit);
-        //layoutFabSettings = (LinearLayout) this.findViewById(R.id.layoutFabSettings);
-
-        //When main Fab (Settings) is clicked, it expands if not expanded already.
-        //Collapses if main FAB was open already.
-        //This gives FAB (Settings) open/close behavior
-        fabSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fabExpanded == true){
-                    closeSubMenusFab();
-                } else {
-                    openSubMenusFab();
-                }
-            }
-        });
-
-        //Only main FAB is visible in the beginning
-        closeSubMenusFab();
-
-        // Fabs
 
         insurance = (CheckBox)findViewById(R.id.insuranceCheckbox);
         if(amount.getText().toString().equals(" ")){
@@ -254,8 +222,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             });
         }
-
-
     }
     private void setDateTimeField() {
         date.setOnClickListener(this);
@@ -271,9 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
     }
-
     @Override
     public void onClick(View view) {
         if(view == date) {
@@ -291,8 +255,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
+            try {
+                //Getting the Bitmap from Gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                image.setImageBitmap(bitmap);
 
-            file.setText(filePath.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     public String getFileExtension(Uri uri) {
@@ -323,30 +294,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             //displaying success toast
 
-                            Toast.makeText(getApplicationContext(), "Package Created ", Toast.LENGTH_LONG).show();
+                            thankx.setVisibility(View.VISIBLE);
+                            Animation upAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
+                            upAnim.reset();
+                            thankx.clearAnimation();
+                            thankx.setAnimation(upAnim);
 
-                            //Firebase ref = new Firebase("https://i-courier-18c0e.firebaseio.com/I-Courier/Poster");
-                            //creating the upload object to store uploaded image details
-                           // Toast.makeText(getApplicationContext(),  ref.child("Poster").toString(), Toast.LENGTH_LONG).show();
-                           /* Toast.makeText(getApplicationContext(), u.getPuniqkey()+"\n"+uniqkey, Toast.LENGTH_LONG).show();
-                            try {
-                                if(u.getPuniqkey().equals(uniqkey)){
-
-                                    uniqkeyz.setError("Key Taken");
-                                     }else {
-
-                                    Courier upload = new Courier("True",username,name.getText().toString().trim(),phone,street,city,code,destination.getText().toString().trim(),description.getText().toString().trim(),date.getText().toString().trim(),amount.getText().toString().trim(),pname.getText().toString().trim(),email,newbidamt,taskSnapshot.getDownloadUrl().toString(),uniqkey);
-                                    mDatabase.child(uniqkey).setValue(upload);
-
-                                    Toast.makeText(getApplicationContext(), "Package Created ", Toast.LENGTH_LONG).show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Animation upAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
+                                    upAnim.reset();
+                                    thankx.clearAnimation();
+                                    thankx.setAnimation(upAnim);
+                                    thankx.setVisibility(View.GONE);
 
                                 }
-                            }catch (Exception e){
-                                uniqkeyz.setError("Key Taken");
-                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-                            }
-*/
-                            Courier upload = new Courier("True",username,name.getText().toString().trim(),phone,street,city,code,destination.getText().toString().trim(),description.getText().toString().trim(),date.getText().toString().trim(),amount.getText().toString().trim(),pname.getText().toString().trim(),email,newbidamt,taskSnapshot.getDownloadUrl().toString(),uniqkey);
+                            }, 10000);
+
+                            Courier upload = new Courier("True",username,name.getText().toString().trim(),phone,street,city,code,destination.getText().toString().trim(),description.getText().toString().trim(),date.getText().toString().trim(),amount.getText().toString().trim(),pname.getText().toString().trim(),email,newbidamt,taskSnapshot.getDownloadUrl().toString(),uniqkey,"false");
                             mDatabase.child(uniqkey).setValue(upload);
 
                             //adding an upload to firebase database
@@ -373,63 +339,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //display an error if no file is selected
         }
     }
-
-    //closes FAB submenus
-    private void closeSubMenusFab(){
-        layoutFabSave.setVisibility(View.INVISIBLE);
-        layoutFabEdit.setVisibility(View.INVISIBLE);
-        fabSettings.setImageResource(R.drawable.ic_settings_black_24dp);
-        fabExpanded = false;
-    }
-
-    //Opens FAB submenus
-    private void openSubMenusFab(){
-        layoutFabSave.setVisibility(View.VISIBLE);
-        layoutFabEdit.setVisibility(View.VISIBLE);
-        //Change settings icon to 'X' icon
-        fabSettings.setImageResource(R.drawable.ic_close_black_24dp);
-        fabExpanded = true;
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_nav, menu);
+        getMenuInflater().inflate(R.menu.back, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_logout) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setIcon(R.mipmap.ic_launcher);
-            builder.setMessage(Html.fromHtml("<font color='#627984'>Are you sure you want to logout?</font>"))
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            startActivity(new Intent(getApplicationContext(),TabActivity.class));
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-            return true;
-        }
-        if(id == R.id.action_key){
-
-            Intent i = new Intent(this,Key.class);
+        if (id == R.id.action_back) {
+            Intent i = new Intent(MainActivity.this,Options.class);
+            i.putExtra("fullname",fullna);
             i.putExtra("username",username);
+            i.putExtra("street",street);
+            i.putExtra("city",city);
+            i.putExtra("code",code);
+            i.putExtra("phone",phone);
+            i.putExtra("email",email);
+
             startActivity(i);
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

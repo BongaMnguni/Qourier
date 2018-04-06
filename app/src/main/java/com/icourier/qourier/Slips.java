@@ -37,7 +37,7 @@ public class Slips extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private List<Courier> packages;
-    String username;
+    String username,fullna;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,9 @@ public class Slips extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         Bundle bundle = getIntent().getExtras();
-        String fullna = bundle.getString("fullname");
+        fullna = bundle.getString("fullname");
         username = bundle.getString("username");
+
 
         tvname = (TextView)findViewById(R.id.txtPname);
         tvname.setText(fullna);
@@ -125,6 +126,8 @@ public class Slips extends AppCompatActivity {
         if (id == R.id.action_back) {
             // pass back the value to main
             Intent i = new Intent(Slips.this,MakeDelivery.class);
+            i.putExtra("fullname",fullna);
+            i.putExtra("username",username);
 
             return true;
         }

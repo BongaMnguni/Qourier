@@ -33,7 +33,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.PackageV
     @Override
     public PackageAdapter.PackageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         c = parent.getContext();
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.package_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.packages_cardview, parent, false);
 
         PackageAdapter.PackageViewHolder viewHolder = new PackageAdapter.PackageViewHolder(v);
         return viewHolder;
@@ -69,9 +69,11 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.PackageV
                             public void onClick(DialogInterface dialog, int id) {
                               try{
                                   Firebase ref = new Firebase("https://i-courier-18c0e.firebaseio.com/I-Courier/Packages");
-                                              ref.child(courier.getKey().toString().trim()).child("delete").setValue("deleted");
 
-                                  Toast.makeText(c,"",Toast.LENGTH_LONG).show();
+
+                                  ref.child(courier.getKey()).child("delete").setValue("deleted");
+
+                                  Toast.makeText(c,""+courier.getKey().toString(),Toast.LENGTH_LONG).show();
 
                                 } catch (Exception e) {
                                     e.printStackTrace();

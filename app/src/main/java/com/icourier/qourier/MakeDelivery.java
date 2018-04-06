@@ -51,6 +51,10 @@ public class MakeDelivery extends AppCompatActivity {
         setContentView(R.layout.activity_make_delivery);
         getSupportActionBar().setTitle("Package To Deliver");
 
+        Bundle bundle = getIntent().getExtras();
+        fullname = bundle.getString("fullname");
+        username = bundle.getString("username");
+
         recyclerView = (RecyclerView) findViewById(R.id.courier_recyclerView);
         recyclerView.setHasFixedSize(true);
      //   recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -67,6 +71,7 @@ public class MakeDelivery extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),JobDone.class);
+                i.putExtra("fullname",fullname);
                 i.putExtra("username",username);
                startActivity(i);
             }
@@ -145,6 +150,8 @@ public class MakeDelivery extends AppCompatActivity {
                     Courier doc = postSnapshot.getValue(Courier.class);
                     String key = postSnapshot.getKey();
                     doc.setKey(key);
+                    doc.setUsername(username);
+                    doc.setFullname(fullname);
 
                   if(doc.getCheck().equals("True")){
                         uploads.add(doc);
@@ -162,9 +169,7 @@ public class MakeDelivery extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        fullname = bundle.getString("fullname");
-        username = bundle.getString("username");
+
 
     }
     //closes FAB submenus

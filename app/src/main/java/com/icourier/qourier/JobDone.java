@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -18,11 +19,11 @@ import java.util.TimerTask;
 
 public class JobDone extends AppCompatActivity {
 
-    String username;
+    String username,fullnam;
     EditText edtkey;
     Button key;
     TextView textView;
-
+LinearLayout layout;
     Timer t ;
     TimerTask task ;
 
@@ -31,6 +32,13 @@ public class JobDone extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_done);
         textView = (TextView) findViewById(R.id.textv);
+
+        Bundle bundle = getIntent().getExtras();
+        fullnam = bundle.getString("fullname");
+        username = bundle.getString("username");
+
+        layout = (LinearLayout)findViewById(R.id.key_container);
+        layout.getBackground().setAlpha(150);
 
         t=new Timer();
         task = new TimerTask() {
@@ -88,7 +96,9 @@ public class JobDone extends AppCompatActivity {
         if (id == R.id.action_back) {
             // pass back the value to main
             Intent i = new Intent(JobDone.this,MakeDelivery.class);
-
+            i.putExtra("fullname",fullnam);
+            i.putExtra("username",username);
+            startActivity(i);
             return true;
         }
 

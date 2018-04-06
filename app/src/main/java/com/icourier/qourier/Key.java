@@ -35,7 +35,11 @@ public class Key extends AppCompatActivity {
     RecyclerView recyclerView;
     KeyAdapter noticeViewAdapter;
     TextView textView;
-
+    private String street,fullna;
+    private String city;
+    private String code;
+    private String phone;
+    private String email,id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +47,18 @@ public class Key extends AppCompatActivity {
         setContentView(R.layout.activity_key);
         getSupportActionBar().setTitle("Key");
 
+        Bundle bundle = getIntent().getExtras();
+        fullna = bundle.getString("fullname");
+
+        street = bundle.getString("street");
+        city = bundle.getString("city");
+        code = bundle.getString("code");
+        phone = bundle.getString("phone");
+        email = bundle.getString("email");
+
         textView = (TextView) findViewById(R.id.texts);
 
-        Bundle b = getIntent().getExtras();
-        user =  b.getString("username");
+        user =  bundle.getString("username");
 
         recyclerView = (RecyclerView)findViewById(R.id.listkeys);
         linearlayout = new LinearLayoutManager(this.getApplicationContext());
@@ -71,7 +83,16 @@ public class Key extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_back) {
-           // startActivity(new Intent(Key.this,MainActivity.class));
+            Intent i = new Intent(Key.this,Options.class);
+            i.putExtra("fullname",fullna);
+            i.putExtra("username",user);
+            i.putExtra("street",street);
+            i.putExtra("city",city);
+            i.putExtra("code",code);
+            i.putExtra("phone",phone);
+            i.putExtra("email",email);
+
+            startActivity(i);
             return true;
         }
 
@@ -80,7 +101,6 @@ public class Key extends AppCompatActivity {
     private void showMessages(){
 
         JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
         List<KeyItems> arrList = new ArrayList<KeyItems>();
         try {
             jsonObject = new JSONObject(JSON_STRING);
@@ -93,9 +113,10 @@ public class Key extends AppCompatActivity {
                 username = jo.getString(Config.TAG_KEY_USERNAME);
                 keys = jo.getString(Config.TAG_KEY_KEYS);
                 time = jo.getString(Config.TAG_KEY_TIME);
+                id = jo.getString(Config.TAG_KEY_ID);
 
                 if(username.equalsIgnoreCase(user)) {
-                    arrList.add(new KeyItems(keys, name, username, time));
+                    arrList.add(new KeyItems(keys, name, username, time,id));
                 }
 
             }
@@ -115,7 +136,8 @@ public class Key extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(Key.this,"Fetching Messages"," Please Wait...",false,false);
+                loading = ProgressDialog.show(Key.this,null," Please Wait...",false,false);
+
             }
 
             @Override
@@ -133,6 +155,7 @@ public class Key extends AppCompatActivity {
                 String s = rh.sendGetRequest(Config.URL_GET_ALL_KEYS);
                 return s;
             }
+
         }
         GetJSON gj = new GetJSON();
         gj.execute();

@@ -7,6 +7,7 @@
     card_view:cardElevation="3dp"
     card_view:cardCornerRadius="2dp"
     card_view:contentPaddingLeft="3dp"
+    card_view:cardUseCompatPadding="true"
     card_view:contentPaddingTop="8dp"
     card_view:contentPaddingBottom="8dp"
     card_view:contentPaddingRight="3dp"
@@ -26,6 +27,14 @@
             android:layout_height="wrap_content"
             android:text="Name"/>
 
+        <ImageView
+            android:id="@+id/imgtrash"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_trash"/>
+
         <LinearLayout
             android:id="@+id/klayout"
             android:layout_below="@+id/kname"
@@ -39,9 +48,10 @@
                 android:layout_below="@+id/messagesubject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/malesender"/>
+                android:src="@drawable/key_giver"/>
 
             <TextView
+                android:layout_marginLeft="13dp"
                 android:textColor="#0c8708"
                 android:layout_gravity="center_vertical"
                 android:textStyle="bold"

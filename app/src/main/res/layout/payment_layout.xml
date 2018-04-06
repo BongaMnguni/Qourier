@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#e4e2e2">
+
+        <LinearLayout
+            android:padding="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/paypal"
+                    android:layout_width="100dp"
+                   android:src="@drawable/payfast"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="16dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/payfast"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/paypal"/>
+
+        </LinearLayout>
+</FrameLayout>

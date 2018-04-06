@@ -206,6 +206,7 @@ public class SignupAttachments extends AppCompatActivity {
 
                             //displaying success toast
                             Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(),Login.class));
 
                             //creating the upload object to store uploaded image details
 

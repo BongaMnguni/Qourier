@@ -33,20 +33,31 @@ public class UploadSlip extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private List<Courier> packages;
-    String fullna;
+    String fullna,username;
+    private String street;
+    private String city;
+    private String code;
+    private String phone;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_slip);
-        getSupportActionBar().setTitle("Accepted Items");
+        getSupportActionBar().setTitle("Package List");
 // change id
         recyclerView = (RecyclerView) findViewById(R.id.service_recyclerView);
         recyclerView.setHasFixedSize(true);
 
         Bundle bundle = getIntent().getExtras();
          fullna = bundle.getString("fullname");
-        final String username = bundle.getString("username");
+         username = bundle.getString("username");
+
+        street = bundle.getString("street");
+        city = bundle.getString("city");
+        code = bundle.getString("code");
+        phone = bundle.getString("phone");
+        email = bundle.getString("email");
 
         tvname = (TextView)findViewById(R.id.txtpnamez);
         tvname.setText(fullna);
@@ -71,7 +82,7 @@ public class UploadSlip extends AppCompatActivity {
         //displaying progress dialog while fetching images
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_PACKAGES);
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_DEVICES);
 
         //adding an event listener to fetch values
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -83,20 +94,15 @@ public class UploadSlip extends AppCompatActivity {
                 //iterating through all the values in database
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Courier doc = postSnapshot.getValue(Courier.class);
+                    String key = postSnapshot.getKey();
+                    doc.setKey(key);
 
-                    // TODO Extract substring NOTE : look for index of *, refer to CourierAdapter line 180
-
-                    String temp = doc.getUniqueID();
-                    int indexOf = temp.indexOf('*');
-                    String newstr = temp.substring(0,indexOf);
-
-                    if(newstr.equals(username)){
-                         packages.add(doc);
-                     }
-
+                    if(doc.getUsername().equals(username) && doc.getDelete().equals("false")){
+                        packages.add(doc);
+                    }
                 }
                 //creating adapter
-                adapter = new PackageAdapter(getApplicationContext(), packages);
+                adapter = new ListPackageAdapter(getApplicationContext(), packages);
 
                 //adding adapter to recyclerview
                 recyclerView.setAdapter(adapter);
@@ -125,8 +131,14 @@ public class UploadSlip extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_back) {
             // pass back the value to main
-                    Intent i = new Intent(UploadSlip.this,MainActivity.class);
-                    i.putExtra("fullname",fullna);
+                    Intent i = new Intent(UploadSlip.this,Options.class);
+                            i.putExtra("fullname",fullna);
+                            i.putExtra("username",username);
+                            i.putExtra("street",street);
+                            i.putExtra("city",city);
+                            i.putExtra("code",code);
+                            i.putExtra("phone",phone);
+                            i.putExtra("email",email);
                     startActivity(i);
 
             return true;

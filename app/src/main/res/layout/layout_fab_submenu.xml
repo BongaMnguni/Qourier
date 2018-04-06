@@ -133,7 +133,7 @@
             android:id="@+id/fabJobDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icons8profile"
+            android:src="@drawable/job_done"
             app:backgroundTint="@android:color/holo_green_dark"
             app:fabSize="mini" />
 
